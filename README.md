@@ -21,11 +21,11 @@ be set in either Python or Rust source files.
 
 ## Building a Release
 
-A project can be built with the standard build module.
+A project can be built with the standard [build](https://build.pypa.io/en/stable/) module.
 
 ```bash
 (.venv) $ pip install build
 (.venv) $ python -m build
 ```
 
-The packages in the `dist` folder could be then uploaded with `twine`.
+The packages in the `dist` folder could be then uploaded with [twine](https://twine.readthedocs.io/en/stable/).
