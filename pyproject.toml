@@ -1,0 +1,81 @@
+[build-system]
+requires = [
+    "setuptools>=80.9.0",
+    "setuptools-rust>=1.12.0"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "example-polars"
+version = "0.1.0"
+description = "A Python package that uses Polars via PyO3"
+authors = [
+    { name = "Rob Blackbourn", email = "rob.blackbourn@gmail.com" }
+]
+readme = "README.md"
+dependencies = [
+    "polars==1.35.2"
+]
+
+[project.scripts]
+sum-cli = "example_polars.sum_cli:main"
+rust-demo = "example_polars.rust_demo:main"
+
+[project.urls]
+"Homepage" = "https://github.com/rob-blackbourn/example-polars"
+"Repository" = "https://github.com/rob-blackbourn/example-polars"
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "mypy",
+    "pylint"
+]
+
+[tool.setuptools.packages]
+find = { where = [ "python" ] }
+
+[[tool.setuptools-rust.ext-modules]]
+target = "example_polars._lib"
+binding = "PyO3"
+
+[[tool.setuptools-rust.bins]]
+target = "print-hello"
+args = ["--profile", "release-lto"]
+
+# pylint
+[tool.pylint.main]
+py-version = "3.12"
+jobs = 4
+
+[tool.pylint.basic]
+good-names = ["i", "j", "k", "ex", "Run", "_"]
+bad-names = ["foo", "bar", "baz", "toto", "tutu", "tata"]
+
+[tool.pylint."messages control"]
+disable = [
+    "raw-checker-failed",
+    "bad-inline-option",
+    "locally-disabled",
+    "file-ignored",
+    "suppressed-message",
+    "useless-suppression",
+    "deprecated-pragma",
+    "use-symbolic-message-instead",
+    "missing-module-docstring",
+    "missing-function-docstring",
+    "pointless-string-statement",
+    "exec-used",
+]
+
+# pytest
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+# mypy
+[tool.mypy]
+fileds = ["python/example_polars", "tests", "examples"]
+
+[[tool.mypy.overrides]]
+module = "pytest"
+ignore_missing_imports = true

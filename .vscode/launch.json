@@ -1,0 +1,35 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python/Rust Debugger: Current File",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${workspaceFolder}/py-polars/debug/launch.py",
+            "args": [
+                "${file}"
+            ],
+            "console": "internalConsole",
+            "justMyCode": true,
+            "serverReadyAction": {
+                "pattern": "pID = ([0-9]+)",
+                "action": "startDebugging",
+                "name": "Rust LLDB"
+            }
+        },
+        {
+            "name": "Rust LLDB",
+            "pid": "351269",
+            "type": "lldb",
+            "request": "attach",
+            "program": "${workspaceFolder}/py-polars/.venv/bin/python",
+            "stopOnEntry": false,
+            "sourceLanguages": [
+                "rust"
+            ],
+            "presentation": {
+                "hidden": true
+            }
+        }
+    ]
+}
